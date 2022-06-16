@@ -15,7 +15,7 @@ import java.util.function.Function;
 @Component
 public class CryptoCurrencyMappers {
 
-    public Function<CryptoCurrency, CryptoCurrencyDto> fromGeneralEntityToDto(){
+    public Function<CryptoCurrency, CryptoCurrencyDto> fromGeneralEntityToDto() {
         return crypto -> {
             var cryptoCurrencyDto = new CryptoCurrencyDto();
             cryptoCurrencyDto.setId(crypto.getId());
@@ -30,7 +30,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<BoughtCryptoCurrency, BoughtCryptoCurrencyDto> fromBuyEntityToDto(){
+    public Function<BoughtCryptoCurrency, BoughtCryptoCurrencyDto> fromBuyEntityToDto() {
         return crypto -> {
             var boughtCryptoCurrencyDto = new BoughtCryptoCurrencyDto();
             boughtCryptoCurrencyDto.setId(crypto.getId());
@@ -45,7 +45,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<SoldCryptoCurrency, SoldCryptoCurrencyDto> fromSoldEntityToDto(){
+    public Function<SoldCryptoCurrency, SoldCryptoCurrencyDto> fromSoldEntityToDto() {
         return crypto -> {
             var soldCryptoCurrencyDto = new SoldCryptoCurrencyDto();
             soldCryptoCurrencyDto.setId(crypto.getId());
@@ -60,8 +60,8 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<CryptoCurrencyDto, CryptoCurrency> fromGeneralDtoToEntity(){
-        return crypto ->{
+    public Function<CryptoCurrencyDto, CryptoCurrency> fromGeneralDtoToEntity() {
+        return crypto -> {
             var cryptoCurrency = new CryptoCurrency();
             cryptoCurrency.setId(crypto.getId());
             cryptoCurrency.setCryptoCurrencyName(crypto.getCryptoCurrencyName());
@@ -75,7 +75,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<BoughtCryptoCurrencyDto, BoughtCryptoCurrency> fromBuyDtoToEntity(){
+    public Function<BoughtCryptoCurrencyDto, BoughtCryptoCurrency> fromBuyDtoToEntity() {
         return crypto -> {
             var boughtCryptoCurrency = new BoughtCryptoCurrency();
             boughtCryptoCurrency.setId(crypto.getId());
@@ -90,7 +90,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<SoldCryptoCurrencyDto, SoldCryptoCurrency> fromSoldDtoToEntity(){
+    public Function<SoldCryptoCurrencyDto, SoldCryptoCurrency> fromSoldDtoToEntity() {
         return crypto -> {
             var soldCryptoCurrency = new SoldCryptoCurrency();
             soldCryptoCurrency.setId(crypto.getId());
@@ -105,7 +105,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<UserDto, User> fromUserDtoToEntity(){
+    public Function<UserDto, User> fromUserDtoToEntity() {
         return userDto -> {
             var user = new User();
             user.setId(userDto.getId());
@@ -116,7 +116,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<User, UserDto> fromUserToDto(){
+    public Function<User, UserDto> fromUserToDto() {
         return user -> {
             var userDto = new UserDto();
             userDto.setId(user.getId());

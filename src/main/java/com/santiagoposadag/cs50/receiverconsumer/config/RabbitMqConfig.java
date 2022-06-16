@@ -4,6 +4,7 @@ package com.santiagoposadag.cs50.receiverconsumer.config;
 
 
 
+import com.santiagoposadag.cs50.receiverconsumer.usecases.ReceiveFromUserActionUseCase;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.RecieveFromBuyActionQueueUseCase;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.RecieveFromGeneralActionQueueUseCase;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.RecieveFromSellActionQueueUseCase;
@@ -17,6 +18,8 @@ public class RabbitMqConfig {
     public static final String GENERAL_QUEUE = "action.general";
     public static final String SELL_QUEUE = "action.sell";
     public static final String BUY_QUEUE = "action.buy";
+    public static final String USER_QUEUE = "action.user";
+
 
     @Autowired
     RecieveFromGeneralActionQueueUseCase generalAction;
@@ -26,6 +29,9 @@ public class RabbitMqConfig {
 
     @Autowired
     RecieveFromSellActionQueueUseCase sellAction;
+
+    @Autowired
+    ReceiveFromUserActionUseCase userAction;
 
 
     @RabbitListener(queues = {GENERAL_QUEUE})
@@ -42,5 +48,8 @@ public class RabbitMqConfig {
     public void listenerOfBuyActions(String received){
         buyAction.receiveMessage(received);
     }
+
+    @RabbitListener(queues = USER_QUEUE)
+    public void listenerOfUserActions(String received) {userAction.receiveMessage(received);}
 
 }

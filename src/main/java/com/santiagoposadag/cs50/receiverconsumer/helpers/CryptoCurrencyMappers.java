@@ -3,9 +3,11 @@ package com.santiagoposadag.cs50.receiverconsumer.helpers;
 import com.santiagoposadag.cs50.receiverconsumer.collections.BoughtCryptoCurrency;
 import com.santiagoposadag.cs50.receiverconsumer.collections.CryptoCurrency;
 import com.santiagoposadag.cs50.receiverconsumer.collections.SoldCryptoCurrency;
+import com.santiagoposadag.cs50.receiverconsumer.collections.User;
 import com.santiagoposadag.cs50.receiverconsumer.dto.BoughtCryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.CryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.SoldCryptoCurrencyDto;
+import com.santiagoposadag.cs50.receiverconsumer.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
@@ -13,7 +15,7 @@ import java.util.function.Function;
 @Component
 public class CryptoCurrencyMappers {
 
-    public Function<CryptoCurrency, CryptoCurrencyDto> fromGeneralEntityToDto(){
+    public Function<CryptoCurrency, CryptoCurrencyDto> fromGeneralEntityToDto() {
         return crypto -> {
             var cryptoCurrencyDto = new CryptoCurrencyDto();
             cryptoCurrencyDto.setId(crypto.getId());
@@ -28,7 +30,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<BoughtCryptoCurrency, BoughtCryptoCurrencyDto> fromBuyEntityToDto(){
+    public Function<BoughtCryptoCurrency, BoughtCryptoCurrencyDto> fromBuyEntityToDto() {
         return crypto -> {
             var boughtCryptoCurrencyDto = new BoughtCryptoCurrencyDto();
             boughtCryptoCurrencyDto.setId(crypto.getId());
@@ -43,7 +45,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<SoldCryptoCurrency, SoldCryptoCurrencyDto> fromSoldEntityToDto(){
+    public Function<SoldCryptoCurrency, SoldCryptoCurrencyDto> fromSoldEntityToDto() {
         return crypto -> {
             var soldCryptoCurrencyDto = new SoldCryptoCurrencyDto();
             soldCryptoCurrencyDto.setId(crypto.getId());
@@ -58,8 +60,8 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<CryptoCurrencyDto, CryptoCurrency> fromGeneralDtoToEntity(){
-        return crypto ->{
+    public Function<CryptoCurrencyDto, CryptoCurrency> fromGeneralDtoToEntity() {
+        return crypto -> {
             var cryptoCurrency = new CryptoCurrency();
             cryptoCurrency.setId(crypto.getId());
             cryptoCurrency.setCryptoCurrencyName(crypto.getCryptoCurrencyName());
@@ -73,7 +75,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<BoughtCryptoCurrencyDto, BoughtCryptoCurrency> fromBuyDtoToEntity(){
+    public Function<BoughtCryptoCurrencyDto, BoughtCryptoCurrency> fromBuyDtoToEntity() {
         return crypto -> {
             var boughtCryptoCurrency = new BoughtCryptoCurrency();
             boughtCryptoCurrency.setId(crypto.getId());
@@ -88,7 +90,7 @@ public class CryptoCurrencyMappers {
         };
     }
 
-    public Function<SoldCryptoCurrencyDto, SoldCryptoCurrency> fromSoldDtoToEntity(){
+    public Function<SoldCryptoCurrencyDto, SoldCryptoCurrency> fromSoldDtoToEntity() {
         return crypto -> {
             var soldCryptoCurrency = new SoldCryptoCurrency();
             soldCryptoCurrency.setId(crypto.getId());
@@ -100,6 +102,28 @@ public class CryptoCurrencyMappers {
             soldCryptoCurrency.setUserId(crypto.getUserId());
             soldCryptoCurrency.setRoutingKey(crypto.getRoutingKey());
             return soldCryptoCurrency;
+        };
+    }
+
+    public Function<UserDto, User> fromUserDtoToEntity() {
+        return userDto -> {
+            var user = new User();
+            user.setId(userDto.getId());
+            user.setName(userDto.getName());
+            user.setLastName(userDto.getLastName());
+            user.setRoutingKey(userDto.getRoutingKey());
+            return user;
+        };
+    }
+
+    public Function<User, UserDto> fromUserToDto() {
+        return user -> {
+            var userDto = new UserDto();
+            userDto.setId(user.getId());
+            userDto.setName(user.getName());
+            userDto.setLastName(user.getLastName());
+            userDto.setRoutingKey(user.getRoutingKey());
+            return userDto;
         };
     }
 }

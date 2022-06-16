@@ -4,7 +4,9 @@ package com.santiagoposadag.cs50.receiverconsumer.routers;
 import com.santiagoposadag.cs50.receiverconsumer.dto.BoughtCryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.CryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.SoldCryptoCurrencyDto;
+import com.santiagoposadag.cs50.receiverconsumer.dto.UserDto;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.GetAllActionsFromAUserUseCase;
+import com.santiagoposadag.cs50.receiverconsumer.usecases.GetAllUserActionsFromUserUseCase;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.GetBuyActionsFromAUserUseCase;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.GetSellActionsFromAUserUseCase;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +16,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.*;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 
@@ -22,7 +24,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class QueryRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> getAllActionsByUserId(GetAllActionsFromAUserUseCase getAllActionsFromAUserUseCase){
+    public RouterFunction<ServerResponse> getAllActionsByUserId(GetAllActionsFromAUserUseCase getAllActionsFromAUserUseCase) {
         return route(GET("/getAllActions/{userId}"),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -34,7 +36,7 @@ public class QueryRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> getBuyActionsByUserId(GetBuyActionsFromAUserUseCase getBuyActionsFromAUserUseCase){
+    public RouterFunction<ServerResponse> getBuyActionsByUserId(GetBuyActionsFromAUserUseCase getBuyActionsFromAUserUseCase) {
         return route(GET("/getBuyActions/{userId}"),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -46,7 +48,7 @@ public class QueryRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> getSellActionsByUserId(GetSellActionsFromAUserUseCase getSellActionsFromAUserUseCase){
+    public RouterFunction<ServerResponse> getSellActionsByUserId(GetSellActionsFromAUserUseCase getSellActionsFromAUserUseCase) {
         return route(GET("/getSellActions/{userId}"),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -57,4 +59,15 @@ public class QueryRouter {
         );
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> getAllUsers(GetAllUserActionsFromUserUseCase getAllUserActionsFromUserUseCase) {
+        return route(GET("getAllUsers"),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(
+                                getAllUserActionsFromUserUseCase.apply(),
+                                UserDto.class
+                        ))
+        );
+    }
 }
